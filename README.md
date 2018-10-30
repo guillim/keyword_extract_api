@@ -35,7 +35,6 @@ Then you can use the API to send some text and receive keywords:
 curl -X POST \
   http://127.0.0.1:5000/keywords \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: e0192f28-b074-4c3c-8578-b78021b6f3fc' \
   -H 'cache-control: no-cache' \
   -d '{
 	"method": "sgrank",
