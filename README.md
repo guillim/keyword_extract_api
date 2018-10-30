@@ -18,7 +18,7 @@ cd api
 make up
 ```
 
-In your browser, go to (http://localhost:5000/status)(http://localhost:5000/status) and it should print
+In your browser, go to [localhost:5000/status](http://localhost:5000/status) and it should print
 
 ```
 {
