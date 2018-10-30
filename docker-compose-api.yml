@@ -1,0 +1,12 @@
+version: '2.1'
+services:
+  api:
+    container_name: ${APP}
+    build:
+      context: .
+      args:
+        proxy: ${http_proxy}
+        app_name: ${APP}
+    restart: always
+    ports:
+      - "5000:5000"
