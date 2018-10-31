@@ -46,12 +46,13 @@ class TextacyFormatting(object):
 class TextacyResponse(Resource):
     def post(self):
         data = request.json
+        params = data.get('params')
         if 'text' not in data:
             abort(400, "No parameter text was founds.")
         else:
             tc = TextacyFormatting(data, lang=u'fr')
             try:
-                keywords = tc.get_keyterms()
+                keywords = tc.get_keyterms(params=params)
                 return {'keywords': keywords}, 200
             except Exception as e:
                 abort(400, e)
