@@ -51,7 +51,7 @@ Returns:
 {
     "keywords": [
         [
-            "monder entier",
+            "monde entier",
             0.1406383617
         ],
         [
