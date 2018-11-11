@@ -2,16 +2,24 @@
 
 A small api for keywords extraction from a small text written in french, encapsulated in docker.
 
-**You must have docker installed to make this work**
+## Live demo
 
-### Install
+Check this [demo](http://keyword-extract-api.herokuapp.com/documentation/) to see this tool in action ! 
+(Thanks Heroku for hosting it)
+
+
+
+## Install
+
 
 ```sh
 git clone https://github.com/guillim/keyword_extract_api.git api
 ```
 
 
-### Verify it is working
+## Launch
+
+**You must have docker installed to make this work**
 
 ```
 cd api
@@ -26,10 +34,12 @@ In your browser, go to [localhost:5000/status](http://localhost:5000/status) and
 }
 ```
 
-Then you can use the API to send some text and receive keywords:
 
+## Use
 
-### Usage
+Then you can use the API to send some text and receive keywords. We present two ways: Curl and Swagger. Feel free to use postman or anything else to make your calls.
+
+#### Curl
 
 ```bash
 curl -X POST \
@@ -66,36 +76,18 @@ Returns:
 }
 ```
 
-### Options
+#### Swagger
 
-Parameters available in the models are (optional):  
+Go to [localhost:5000/documentation](http://localhost:5000/documentation) and you will have an interactive tool for testing
 
-Note: options available are inherited from textacy. Simply don't write it if you don't want it (you'll have default options)
+## Documentation
 
+Go to [localhost:5000/documentation](http://localhost:5000/documentation) for any question about paramters availables, options etc...
 
-* "normalize":  _if you want to apply transformation to words_  
-"lemma" (default)  
-"lower"  
-"null"  
-
-* "n_keyterms": _the number of keywords you want to print out_  
-1  
-2  
-3  
-...  
-10  (default)  
-...  
-
-
-* "ngrams":  _number of words that count as results_  
-1  
-2  
-3  
-...  
-
-default is all ngrams  
 
 ## License
 
 Copyright © 2018 Guillaume Lancrenon
 Distributed under MIT licence.
+
+
