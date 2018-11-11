@@ -1,10 +1,11 @@
 from flask import Flask, json, request, abort
-from flask_restplus import Resource, Api
+from flask_restplus import Resource, Api, fields
 import textacy
 import textacy.keyterms as tck
+import os
 
 app = Flask(__name__)
-api = Api(app)
+api = Api(app, version='1.0', title='keywords_extract',description='API for keywords extraction', doc='/documentation/')
 
 
 class TextacyFormatting(object):
@@ -42,7 +43,22 @@ class TextacyFormatting(object):
         return keywords
 
 
+resource_keywords_params = api.model('keywordsParamsInput', {
+    'normalize': fields.String(description='if you want to normalize your words. "lemma" is default, null is recommended at first', enum=['lemma', 'lower', False], example= 'lemma'),
+    'n_keyterms': fields.Integer(description='number of keywords the API will return (sorted by relevance) - default to 10', example= 3),
+    'ngrams': fields.Integer(description='number of words that count as results - default to all, remove this for all', example= 3)
+})
+
+resource_keywords = api.model('keywordsInput', {
+    'method': fields.String(required=True, description='a method for ranking the keywords. can be sgrank, textrank or singlerank',enum=['sgrank', 'textrank', 'singlerank'], example= 'sgrank'),
+    # 'method': fields.Integer(description='The unique identifier of a blog post'),
+    'params': fields.Nested(resource_keywords_params),
+    # 'params': fields.String(required=True, description='parameters for the use of the method previously defined. There are two parameter: normalize - if you want to lemma your words for instance -  & n_keyterms - if you want specific n_grams to be looked after', example= '{"normalize":null,"n_keyterms":3}'),
+    'text': fields.String(required=True, description='the text you want ot extract keywords from',example= 'Paris is a nice city to live in. I like New york as well, but Paris has a charm you cannot find elsewhere')
+})
+
 @api.route('/keywords')
+@api.expect(resource_keywords)
 class TextacyResponse(Resource):
     def post(self):
         data = request.json
@@ -59,11 +75,18 @@ class TextacyResponse(Resource):
 
 
 @api.route('/status')
+@api.doc(params={})
 class TextacyResponse(Resource):
     def get(self):
         return {'status': 'connected'}, 200
 
 
+ON_HEROKU = os.environ.get('ON_HEROKU')
+# print('ON_HEROKU=',ON_HEROKU)
+if ON_HEROKU:
+    port = int(os.environ.get('PORT', 5000))
+else:
+    port = 5000
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=5000,debug=True)
+    app.run(host="0.0.0.0",port=port,debug=True)
