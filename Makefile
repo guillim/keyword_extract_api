@@ -22,3 +22,5 @@ network:
 up: network api
 
 down: api-stop network-stop
+
+restart: down up

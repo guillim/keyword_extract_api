@@ -1,10 +1,13 @@
 from flask import Flask, json, request, abort
 from flask_restplus import Resource, Api, fields
+from flask_cors import CORS
 import textacy
 import textacy.keyterms as tck
 import os
 
 app = Flask(__name__)
+# cors = CORS(app, resources={r"/*": {"origins": r"/*"}})
+cors = CORS(app, resources={r"/*": {"origins": r"^http.{0,1}://.*dontgomanual.com"}})
 api = Api(app, version='1.0', title='keywords_extract',description='API for keywords extraction', doc='/documentation/')
 
 
