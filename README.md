@@ -87,7 +87,7 @@ Go to [localhost:5000/documentation](http://localhost:5000/documentation) for an
 
 ## License
 
-Copyright © 2018 Guillaume Lancrenon
+Copyright © 2019 Guillaume Lancrenon
 Distributed under MIT licence.
 
 
