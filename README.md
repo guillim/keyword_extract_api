@@ -84,6 +84,9 @@ Go to [localhost:5000/documentation](http://localhost:5000/documentation) and yo
 
 Go to [localhost:5000/documentation](http://localhost:5000/documentation) for any question about paramters availables, options etc...
 
+## Deploy on Heroku
+
+Go to the ``` Heroku Container Registry ``` option for the available commands to trigger from your local folder. Can't use Git integration since it is a docker-compose based app
 
 ## License
 
