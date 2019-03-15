@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 # cors = CORS(app, resources={r"/*": {"origins": r"/*"}})
-cors = CORS(app, resources={r"/*": {"origins": r"^http.{0,1}://.*dontgomanual.com"}})
+cors = CORS(app, resources={r"/*": {"origins": r"^http.*dontgomanual.com"}})
 api = Api(app, version='1.0', title='keywords_extract',description='API for keywords extraction', doc='/documentation/')
 
 
