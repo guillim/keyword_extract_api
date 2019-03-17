@@ -9,6 +9,7 @@ jobs:
 
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Make up to start the network & the api
           command: |
