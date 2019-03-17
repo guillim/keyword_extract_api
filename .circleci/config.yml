@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Make up to start the network and the api
+          name: Make up to start the network & the api
           command: |
             make up
   deploy:
