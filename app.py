@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 # cors = CORS(app, resources={r"/*": {"origins": r"/*"}})
-cors = CORS(app, resources={r"/*": {"origins": r"^http.*dontgomanual.com"}})
+cors = CORS(app, resources={r"/*": {"origins": r"^http.*(dontgomanual.com|keyword-extract-app.herokuapp.com)"}})
 api = Api(app, version='1.0', title='keywords_extract',description='API for keywords extraction', doc='/documentation/')
 
 
