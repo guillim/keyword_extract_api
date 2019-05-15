@@ -41,7 +41,7 @@ class TextacyFormatting(object):
         except Exception as e:
             txt = self.data['text']
         print(txt)
-        doc = textacy.Doc(txt, lang=self.lang)
+        doc = textacy.make_spacy_doc(txt, lang=self.lang)
         keywords = self._apply_keyterm_ranking(doc, params)
         return keywords
 
