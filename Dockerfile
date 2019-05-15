@@ -1,6 +1,6 @@
 FROM python:3.6
 
-RUN pip install textacy flask flask_restplus flask-cors coverage pytest pytest-cov codecov tox-travis enum34 spacy wikipedia2vec
+RUN pip install textacy flask flask_restplus flask-cors  spacy
 COPY . /app
 WORKDIR /app
 

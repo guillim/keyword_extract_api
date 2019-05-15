@@ -4,7 +4,7 @@ A small api for keywords extraction from a small text written in french, encapsu
 
 ## Live demo
 
-Check this [demo](http://keyword-extract-api.herokuapp.com/documentation/) to see this tool in action ! 
+Check this [demo](http://keyword-extract-api.herokuapp.com/documentation/) to see this tool in action !
 (Thanks Heroku for hosting it)
 
 
@@ -88,9 +88,13 @@ Go to [localhost:5000/documentation](http://localhost:5000/documentation) for an
 
 Go to the ``` Heroku Container Registry ``` option for the available commands to trigger from your local folder. Can't use Git integration since it is a docker-compose based app
 
+```bash
+heroku container:login  
+heroku container:push web  
+heroku container:release web
+```
+
 ## License
 
 Copyright © 2019 Guillaume Lancrenon
 Distributed under MIT licence.
-
-
