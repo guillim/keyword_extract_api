@@ -1,5 +1,5 @@
 from flask import Flask, json, request, abort
-from flask_restplus import Resource, Api, fields
+from flask_restx import Resource, Api, fields
 from flask_cors import CORS
 import textacy
 import textacy.keyterms as tck
