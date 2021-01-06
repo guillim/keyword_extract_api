@@ -18,6 +18,7 @@ jobs:
           name: Make up to start the network & the api
           command: |
             make up
+# heroku cannot handle docker CI yet => circleCI could be used but requires access to docker hub and I have no time for that now. We have to deploy manually using heroku CLI container registry. cf README.md
   # deploy:
   #   docker:
   #     - image: python:3.6
@@ -32,9 +33,9 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - heroku/deploy-via-git:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+      # - heroku/deploy-via-git:
+      #     requires:
+      #       - build
+      #     filters:
+      #       branches:
+      #         only: master
