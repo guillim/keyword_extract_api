@@ -2,7 +2,7 @@ from flask import Flask, json, request, abort
 from flask_restx import Resource, Api, fields
 from flask_cors import CORS
 import textacy
-import textacy.keyterms as tck
+import textacy.ke
 import os
 
 app = Flask(__name__)
@@ -25,14 +25,17 @@ class TextacyFormatting(object):
 
     def _apply_keyterm_ranking(self, doc, params=None):
         if self.method == 'sgrank':
-            keywords = textacy.keyterms.sgrank(doc, **params) \
-                if params else tck.sgrank(doc)
+            keywords = textacy.ke.sgrank(doc, **params) \
+                if params else textacy.ke.sgrank(doc)
         elif self.method == 'textrank':
-            keywords = textacy.keyterms.textrank(doc, **params) \
-                if params else tck.textrank(doc)
+            keywords = textacy.ke.textrank(doc, **params) \
+                if params else textacy.ke.textrank(doc)
         elif self.method == 'singlerank':
-            keywords = textacy.keyterms.singlerank(doc, **params) \
-                if params else tck.singlerank(doc)
+            keywords = textacy.ke.singlerank(doc, **params) \
+                if params else textacy.ke.singlerank(doc)
+        elif self.method == 'yake':
+            keywords = textacy.ke.yake(doc, **params) \
+                if params else textacy.ke.yake(doc)
         return keywords
 
     def get_keyterms(self, params=None):
