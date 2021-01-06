@@ -1,5 +1,9 @@
 # Python CircleCI 2.0 configuration file
 version: 2
+
+orbs:
+  heroku: circleci/heroku@0.0.10. # Invoke the Heroku orb
+
 jobs:
   build:
     docker:
@@ -14,21 +18,21 @@ jobs:
           name: Make up to start the network & the api
           command: |
             make up
-  deploy:
-    docker:
-      - image: python:3.6
-    steps:
-      - checkout
-      - run:
-          name: Deploy Master to Heroku
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+  # deploy:
+  #   docker:
+  #     - image: python:3.6
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Deploy Master to Heroku
+  #         command: |
+  #           git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build
-      - deploy:
+      - heroku/deploy-via-git: # Use the pre-configured job
           requires:
             - build
           filters:
