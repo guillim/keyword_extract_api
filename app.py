@@ -28,11 +28,15 @@ class TextacyFormatting(object):
             keywords = textacy.ke.sgrank(doc, **params) \
                 if params else textacy.ke.sgrank(doc)
         elif self.method == 'textrank':
+            if 'ngrams' in params:
+                del params['ngrams']
             keywords = textacy.ke.textrank(doc, **params) \
                 if params else textacy.ke.textrank(doc)
-        elif self.method == 'singlerank':
-            keywords = textacy.ke.singlerank(doc, **params) \
-                if params else textacy.ke.singlerank(doc)
+        elif self.method == 'scake':
+            if 'ngrams' in params:
+                del params['ngrams']
+            keywords = textacy.ke.scake(doc, **params) \
+                if params else textacy.ke.scake(doc)
         elif self.method == 'yake':
             keywords = textacy.ke.yake(doc, **params) \
                 if params else textacy.ke.yake(doc)
@@ -43,20 +47,19 @@ class TextacyFormatting(object):
             txt = self.data['text'].decode('utf-8')
         except Exception as e:
             txt = self.data['text']
-        print(txt)
-        doc = textacy.make_spacy_doc(txt, lang=self.lang)
+        doc = textacy.spacier.core.make_spacy_doc(txt, lang=self.lang)
         keywords = self._apply_keyterm_ranking(doc, params)
         return keywords
 
 
 resource_keywords_params = api.model('keywordsParamsInput', {
     'normalize': fields.String(description='if you want to normalize your words. "lemma" is default, null is recommended at first', enum=['lemma', 'lower', False], example= 'lemma'),
-    'n_keyterms': fields.Integer(description='number of keywords the API will return (sorted by relevance) - default to 10', example= 3),
-    'ngrams': fields.Integer(description='number of words that count as results - default to all, remove this for all', example= 3)
+    'topn': fields.Integer(description='number of keywords the API will return (sorted by relevance) - default to 10', example= 3),
+    'ngrams': fields.Integer(description='depends on the algorithm. number of words for results - remove this for all', example= 3)
 })
 
 resource_keywords = api.model('keywordsInput', {
-    'method': fields.String(required=True, description='a method for ranking the keywords. can be sgrank, textrank or singlerank',enum=['sgrank', 'textrank', 'singlerank'], example= 'sgrank'),
+    'method': fields.String(required=True, description='a method for ranking the keywords. can be sgrank, textrank or scake',enum=['sgrank', 'textrank', 'scake', 'yake'], example= 'sgrank'),
     # 'method': fields.Integer(description='The unique identifier of a blog post'),
     'params': fields.Nested(resource_keywords_params),
     # 'params': fields.String(required=True, description='parameters for the use of the method previously defined. There are two parameter: normalize - if you want to lemma your words for instance -  & n_keyterms - if you want specific n_grams to be looked after', example= '{"normalize":null,"n_keyterms":3}'),
